@@ -1,0 +1,4 @@
+<div class="container">
+    <small *ngIf="lastProduct.length > 0">{{lastProduct}} is the last product added to your cart</small>
+    <app-product-list (data)="receiveProjects($event)"></app-product-list>
+</div>

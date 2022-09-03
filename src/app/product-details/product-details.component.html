@@ -1,0 +1,15 @@
+<div class="container pt-5">
+    <div class="row">
+        <div class="col-md-6">
+            <img style="max-width:300px ;" [src]="product.url" [alt]="product.name">
+        </div>
+        <div class="col-md-6">
+            <h3>{{product.name}}</h3>
+            <span>{{product.price + "$"}}</span>
+            <p class="lead">{{product.description}}</p>
+            <input min="1"  oninput="validity.valid||(value='');"  type="number" #Quantity [value]="1" (change)="qty(product, Quantity.value)"><br>
+            <button class="btn btn-primary mt-5" (click)="addToCart()">Add To Cart</button><br>
+            <a [routerLink]="['/']"  >Back To Product List</a>
+        </div>
+    </div>
+</div>

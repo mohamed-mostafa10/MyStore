@@ -1,0 +1,34 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 pt-5">
+            <div class="card mb-3" *ngFor="let cart of carts" style="max-width: 322px;">
+                <div class="row g-0">
+                  <div class="col-md-4">
+                    <img [src]="cart.url" class="img-fluid rounded-start" alt="...">
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <h5 class="card-title">{{cart.name}}</h5>
+                      <span class="card-text">{{cart.price}}</span><br>
+                      <small class="text-muted">Amount:</small>
+                      <input min="1" oninput="validity.valid||(value='');" type="number" #Quantity [value]="cart.qty || 1" (change)="qty(cart, Quantity.value);sum()"><br>
+                      <button class="btn btn-danger mt-2" (click)="remove(cart, cart.id)">remove</button>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <span *ngIf="carts.length > 0">Total: <p>{{productService.total}}</p></span>
+              <div *ngIf="carts.length == 0"class="alert alert-danger mt-2">
+                        <div >
+                            You dont have products in your cart
+                        </div>
+                </div>
+        </div>
+
+        <div class="col-md-6">
+            <app-checkout-form [products]="carts"></app-checkout-form>
+        </div>
+        
+    </div>
+</div>

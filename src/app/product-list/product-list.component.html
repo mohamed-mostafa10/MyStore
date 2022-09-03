@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="row">
+    <div *ngFor="let product of products" class="col-md-4 p-5 text-center" >
+      <img [src]="product.url" style="max-width:300px;" class="card-img-top" alt="..." [routerLink]="['/product-details', product.id]" routerLinkActive="router-link-active" />
+      <div class="card-body text-center">
+        <h5 class="card-title">{{product.name}}</h5>
+        <p class="fw-bold">
+          {{product.price + "$"}}
+        </p>
+        <input type="number" min="1"  oninput="validity.valid||(value='');"  [ngModel]="product.qty||1" #Quantity value="1" (ngModelChange)="qty(product, Quantity.value)">
+      </div>
+      <button (click)="addToCart(product, Quantity.value)" class="btn btn-primary mt-2">Add To Cart</button>
+    </div>
+  </div>
+</div>

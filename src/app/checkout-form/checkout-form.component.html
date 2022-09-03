@@ -1,0 +1,63 @@
+<form class="pt-5" [formGroup]="checkoutForm" (ngSubmit)="add()">
+    <div class="row">
+        <div class="col-md-6">
+            <p class="text-primary lead" *ngIf="products.length > 0">You have  {{products.length}} product(s) in your cart</p>
+            <div class="form-group">
+                <label for="exampleFormControlInput1" class="form-label">Full Name</label>
+                <input formControlName="fullName" type="text" class="form-control" />
+
+                <div *ngIf="checkoutForm.controls['fullName']
+                    .invalid && (checkoutForm.controls['fullName'].dirty
+                    || checkoutForm.controls['fullName'].touched)"class="alert alert-danger mt-2">
+
+                        <div *ngIf="checkoutForm.controls['fullName'].errors?.['required']">
+                            Name is required.
+                        </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleFormControlInput1" class="form-label">Address</label>
+                <input formControlName="address" type="text" class="form-control" />
+
+                <div *ngIf="checkoutForm.controls['address']
+                    .invalid && (checkoutForm.controls['address'].dirty
+                    || checkoutForm.controls['address'].touched)"class="alert alert-danger mt-2">
+
+                        <div *ngIf="checkoutForm.controls['address'].errors?.['required']">
+                            Address is required.
+                        </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleFormControlInput1" class="form-label">Credit Card Number</label>
+                <input formControlName="cardNumber" #credit type="number" onKeyPress="if(this.value.length==16) return false;" class="form-control" placeholder="(16-digit number)"/>
+                <small style="font-size:12px!important;">We'll never share your payment details with any one else</small>
+
+                <div *ngIf="checkoutForm.controls['cardNumber'].invalid &&
+                     (checkoutForm.controls['cardNumber'].dirty || 
+                      checkoutForm.controls['cardNumber'].touched)"
+                      class="alert alert-danger mt-2">
+
+                        <div *ngIf="checkoutForm.controls['cardNumber'].errors?.['required']">
+                            card Number is required.
+                        </div>
+                      
+                </div>
+                <div *ngIf="credit.value.length<16 && (checkoutForm.controls['cardNumber'].dirty || 
+                      checkoutForm.controls['cardNumber'].touched)"
+                      class="alert alert-danger mt-2">
+
+                        <div >
+                            card Number must be at least 16 characters long.
+                        </div>
+                </div>
+
+            </div>
+
+          
+        </div>
+    </div>
+    <button type="submit"  [disabled]="checkoutForm.invalid || credit.value.length<16" class="btn btn-primary mt-2">Submit</button>
+</form>
